@@ -1,0 +1,36 @@
+std::string data = "108-45-520-70-465-85";
+int arr[6];
+int index = 0;
+
+// Convert std::string to Arduino String
+String strData = String(data.c_str());
+
+// Parse the string
+while (strData.length() > 0) {
+    int pos = strData.indexOf('-');
+    if (pos != -1) {
+        // Extract substring before the '-' delimiter
+        String token = strData.substring(0, pos);
+        
+        // Convert substring to integer and store in the array
+        arr[index++] = token.toInt();
+        
+        // Remove the processed token from the string
+        strData = strData.substring(pos + 1);
+    } else {
+        // Last token, convert and store
+        arr[index++] = strData.toInt();
+        break;
+    }
+}
+
+// Print the values in the array
+for (int i = 0; i < 6; i++) {
+    Serial.println(arr[i]);
+    delay(700);
+}
+
+
+
+/////
+70-80-90-100-120-140
